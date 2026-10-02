@@ -1,4 +1,12 @@
+# Public research pages are open to web and AI search crawlers.
 User-agent: *
+Allow: /
+
+# Search indexing and user-requested retrieval.
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
 Allow: /
 
 Sitemap: https://environment-evolution.github.io/sitemap.xml

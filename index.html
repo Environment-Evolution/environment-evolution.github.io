@@ -78,7 +78,11 @@
       },
       "mainEntity": {
         "@id": "https://environment-evolution.github.io/#paper"
-      }
+      },
+      "relatedLink": [
+        "https://environment-evolution.github.io/skillsynth/",
+        "https://arxiv.org/html/2609.04128v1"
+      ]
     },
     {
       "@type": "ScholarlyArticle",
@@ -176,11 +180,19 @@
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "mainEntityOfPage": {
         "@id": "https://environment-evolution.github.io/#webpage"
+      },
+      "citation": {
+        "@type": "ScholarlyArticle",
+        "@id": "https://environment-evolution.github.io/skillsynth/#paper",
+        "name": "Toward Scalable Terminal Task Synthesis via Skill Graphs",
+        "url": "https://environment-evolution.github.io/skillsynth/",
+        "sameAs": "https://arxiv.org/abs/2604.25727"
       }
     }
   ]
 }
   </script>
+  <link rel="alternate" type="application/x-bibtex" href="citation.bib" title="BibTeX citation">
   <link rel="canonical" href="https://environment-evolution.github.io/">
   <link rel="stylesheet" href="styles.css">
   <script src="evolution.js" defer></script>
@@ -215,7 +227,7 @@
       <div class="section-heading"><p class="eyebrow">01 / OVERVIEW</p><h2 id="overview-title">Environments that keep<br>agents learning.</h2></div>
       <div class="intro-grid">
         <p class="lead">Evolve environments off-policy.<br>Train agents generation by generation.</p>
-        <div class="prose"><p>Environment Evolution studies environment scaling for terminal agents: constructing increasingly difficult environments to sustain agent reinforcement learning.</p><p>As agents improve, fixed environments can become too easy to provide useful learning signals. Environment Evolution incrementally modifies existing terminal environments to construct verified lineages of increasing difficulty, independently of the target policy.</p><p>Three evolution directions guide construction. Two feedback loops check the plan and the executable environment. During reinforcement learning, a lineage scheduler introduces later generations as the agent becomes ready.</p></div>
+        <div class="prose"><p id="research-summary">Environment Evolution is a framework from the Hunyuan Team at Tencent (Tencent Hy) for scaling terminal-agent training environments. It constructs verified lineages of increasing difficulty off-policy, then schedules them generation by generation during reinforcement learning.</p><p>As terminal agents improve, fixed environments can become too easy to provide useful learning signals. Environment Evolution generates harder environments independently of target-agent rollouts.</p><p>Three evolution directions guide construction. Two feedback loops check the plan and the executable environment. During reinforcement learning, a lineage scheduler introduces later generations as the agent becomes ready.</p></div>
       </div>
       <div class="highlights">
         <div><span class="metric">+14.4<span> pp</span></span><h3>Qwen3.6-27B</h3><p>Terminal-Bench 2.1 improvement</p></div>
@@ -227,8 +239,8 @@
 
     <section class="band" id="method" aria-labelledby="method-title"><div class="section">
       <div class="section-heading"><p class="eyebrow">02 / METHOD</p><h2 id="method-title">Three directions.<br>One evolving environment.</h2><p class="section-intro">Represent a solution as a sequence of scenarios and skills. Evolve the sequence along one of three dimensions derived from the multi-turn learning objective.</p></div>
-      <aside class="prior-work" aria-labelledby="skillsynth-title">
-        <div><span class="small-label">OUR PRIOR WORK</span><h3 id="skillsynth-title">SkillSynth: diverse seeds for environment evolution</h3><p>SkillSynth uses skill graphs to synthesize diverse terminal tasks, providing diverse seed environments for Environment Evolution.</p></div>
+      <aside id="related-research" class="prior-work" aria-labelledby="skillsynth-title">
+        <div><span class="small-label">OUR PRIOR WORK</span><h3 id="skillsynth-title">SkillSynth: diverse seeds for environment evolution</h3><p>SkillSynth synthesizes diverse terminal tasks from skill graphs. Environment Evolution uses SkillSynth to supplement its seed pool, then evolves seeds into increasingly difficult environments. Together, the two studies address task diversity and progressive difficulty in environment scaling. <a class="source-link" href="https://arxiv.org/html/2609.04128v1#S5.SS1">Seed construction in the paper ↗</a></p></div>
         <a class="button" href="skillsynth/" aria-label="Explore SkillSynth: Toward Scalable Terminal Task Synthesis via Skill Graphs">Explore SkillSynth <span aria-hidden="true">↗</span></a>
       </aside>
       <div class="directions">
@@ -251,7 +263,7 @@
     <section class="band results" id="results" aria-labelledby="results-title"><div class="section">
       <div class="section-heading"><p class="eyebrow">04 / RESULTS</p><h2 id="results-title">Sustained learning.<br>Stronger terminal agents.</h2><p class="section-intro">200 reinforcement learning steps from a shared RFT checkpoint. The comparison fixes the synthesis model and the total number of training environments.</p></div>
       <div class="table-wrap"><table><caption>Peak accuracy on Terminal-Bench 2.1 (%)</caption><thead><tr><th scope="col">Environment scaling method</th><th scope="col">Qwen3.6-27B</th><th scope="col">Qwen3.6-35B-A3B</th></tr></thead><tbody><tr><th scope="row">Environment Ensemble</th><td>60.0</td><td>52.8</td></tr><tr><th scope="row">Agent–Environment Co-Evolution</th><td>62.9</td><td>55.1</td></tr><tr class="our-result"><th scope="row">Environment Evolution <span>Ours</span></th><td>71.5</td><td>64.9</td></tr></tbody></table></div>
-      <p class="result-note">Evaluated every 10 RL steps, with accuracy averaged over five runs.</p>
+      <p id="evaluation-protocol" class="result-note">Evaluated on Terminal-Bench 2.1 every 10 RL steps, with accuracy averaged over five runs. Values are peak accuracy during 200 RL steps from a shared RFT checkpoint. <a class="source-link" href="https://arxiv.org/html/2609.04128v1#S5.F7">Paper, Figure 7 ↗</a></p>
       <figure class="paper-figure white"><a href="assets/figures/rl_training_dynamics_tb21_combined_plot.svg" target="_blank" rel="noopener" aria-label="Open Figure 7 at full size"><img src="assets/figures/rl_training_dynamics_tb21_combined_plot.svg" alt="Terminal-Bench 2.1 accuracy across 200 RL steps. Environment Evolution peaks at 71.5% for Qwen3.6-27B and 64.9% for Qwen3.6-35B-A3B, above the ensemble and co-evolution baselines." width="1644" height="759" loading="lazy"></a><figcaption><span>Figure 7</span> Held-out benchmark performance over training. Step 0 is the shared checkpoint after rejection sampling fine-tuning (RFT).</figcaption></figure>
 
       <h3 class="analysis-heading">A closer look at evolution and training</h3>
@@ -262,7 +274,7 @@
       <div class="analysis-panel" role="tabpanel" id="panel-mutation" aria-labelledby="tab-mutation" tabindex="0" hidden><p>Evolution can change the instruction, executable environment, and verification system. The paper measures these at the token, file, and test-unit levels, respectively.</p><figure><a href="assets/figures/evolution_effort_mutation_plot.svg" target="_blank" rel="noopener" aria-label="Open Figure 4 at full size"><img src="assets/figures/evolution_effort_mutation_plot.svg" alt="Mutation rates for instructions, environments, and verification systems over 15 evolution generations, under low, high, and max effort." width="1644" height="561" loading="lazy"></a><figcaption><span>Figure 4</span> Component-level changes across evolution generations.</figcaption></figure></div>
     </div></section>
 
-    <section class="section abstract-section" aria-labelledby="abstract-title"><div class="section-heading"><p class="eyebrow">05 / PAPER</p><h2 id="abstract-title">Abstract</h2></div><div class="abstract-text"><p>Scaling interactive and verifiable environments is critical for training terminal agents. As frontier models become more capable, environments synthesized from scratch become less challenging and thus provide limited learning signals. Recent co-evolution methods iteratively synthesize environments near the model's learnable frontier based on weaknesses exposed during rollouts. However, their dependence on on-policy rollouts limits generalization and the continuous provision of learning signals as the model becomes stronger.</p><p>In this paper, we propose environment evolution, which incrementally increases environment difficulty off-policy and schedules the evolved environments generation by generation during training to provide continuous learning signals. We derive three evolution directions that influence environment difficulty from the multi-turn learning objective and then implement evolution along these directions through a loop-engineered multi-agent harness. Quantitative rollout experiments with Hy4 preview, Claude Opus 5, and GPT-5.6 Sol show that environment evolution consistently produces more difficult environments. We validate its effectiveness on Qwen3.6-27B and Qwen3.6-35B-A3B through simple long-horizon RL training, improving their performance by 14.4 and 18.0 percentage points on Terminal-Bench 2.1, respectively.</p><a class="text-link" href="https://arxiv.org/html/2609.04128v1">Read the full paper <span aria-hidden="true">↗</span></a></div></section>
+    <section id="abstract" class="section abstract-section" aria-labelledby="abstract-title"><div class="section-heading"><p class="eyebrow">05 / PAPER</p><h2 id="abstract-title">Abstract</h2></div><div class="abstract-text"><p>Scaling interactive and verifiable environments is critical for training terminal agents. As frontier models become more capable, environments synthesized from scratch become less challenging and thus provide limited learning signals. Recent co-evolution methods iteratively synthesize environments near the model's learnable frontier based on weaknesses exposed during rollouts. However, their dependence on on-policy rollouts limits generalization and the continuous provision of learning signals as the model becomes stronger.</p><p>In this paper, we propose environment evolution, which incrementally increases environment difficulty off-policy and schedules the evolved environments generation by generation during training to provide continuous learning signals. We derive three evolution directions that influence environment difficulty from the multi-turn learning objective and then implement evolution along these directions through a loop-engineered multi-agent harness. Quantitative rollout experiments with Hy4 preview, Claude Opus 5, and GPT-5.6 Sol show that environment evolution consistently produces more difficult environments. We validate its effectiveness on Qwen3.6-27B and Qwen3.6-35B-A3B through simple long-horizon RL training, improving their performance by 14.4 and 18.0 percentage points on Terminal-Bench 2.1, respectively.</p><a class="text-link" href="https://arxiv.org/html/2609.04128v1">Read the full paper <span aria-hidden="true">↗</span></a></div></section>
 
     <section class="citation-band" id="citation" aria-labelledby="citation-title"><div class="section"><div class="citation-heading"><h2 id="citation-title">BibTeX</h2><button type="button" class="button copy-button" id="copy-citation">Copy citation</button></div><pre tabindex="0" aria-label="BibTeX citation"><code id="bibtex">@misc{fan2026environmentevolutionterminalagents,
   title         = {Environment Evolution for Terminal Agents},
@@ -274,7 +286,7 @@
   archivePrefix = {arXiv},
   primaryClass  = {cs.AI},
   url           = {https://arxiv.org/abs/2609.04128}
-}</code></pre><p class="copy-status" id="copy-status" role="status" aria-live="polite"></p></div></section>
+}</code></pre><a class="text-link" href="citation.bib" download>Download BibTeX <span aria-hidden="true">↓</span></a><p class="copy-status" id="copy-status" role="status" aria-live="polite"></p></div></section>
   </main>
   <footer class="site-footer"><div><span>Environment Evolution</span><p>Research from <a href="https://hy.tencent.ai/">Tencent Hunyuan (Tencent Hy) · <span lang="zh-CN">腾讯混元</span></a></p><p>Contact: <a href="mailto:zhiyuan.fan@connect.ust.hk">zhiyuan.fan@connect.ust.hk</a></p><p>Paper and figures: <a href="https://arxiv.org/abs/2609.04128">Fan et al., 2026</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p></div><a href="#paper-title">Back to top ↑</a></footer>
 </body>

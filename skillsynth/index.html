@@ -77,7 +77,11 @@
       },
       "mainEntity": {
         "@id": "https://environment-evolution.github.io/skillsynth/#paper"
-      }
+      },
+      "relatedLink": [
+        "https://environment-evolution.github.io/",
+        "https://arxiv.org/html/2604.25727v1"
+      ]
     },
     {
       "@type": "ScholarlyArticle",
@@ -181,6 +185,7 @@
   ]
 }
   </script>
+  <link rel="alternate" type="application/x-bibtex" href="citation.bib" title="BibTeX citation">
   <link rel="canonical" href="https://environment-evolution.github.io/skillsynth/">
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="styles.css">
@@ -208,7 +213,7 @@
 
     <section class="section" id="overview" aria-labelledby="overview-title">
       <div class="section-heading"><p class="eyebrow">01 / OVERVIEW</p><h2 id="overview-title">Diverse workflows.<br>Executable terminal tasks.</h2></div>
-      <div class="intro-grid"><p class="lead">Scenarios connect skills.<br>Paths become tasks.</p><div class="prose"><p>SkillSynth studies scalable task synthesis for terminal agents, providing diverse seed environments for <a href="../">Environment Evolution</a>.</p><p>SkillSynth builds a scenario-mediated skill graph from real terminal skills. Scenarios form the nodes; skills connect them as directed transitions. Sampling paths from this graph yields coherent workflows with diverse scenario–skill combinations.</p><p>A multi-agent harness turns each workflow into an executable task, then verifies and repairs it. The resulting tasks support trajectory collection for training terminal agents.</p></div></div>
+      <div class="intro-grid"><p class="lead">Scenarios connect skills.<br>Paths become tasks.</p><div class="prose"><p id="research-summary">SkillSynth is a terminal task synthesis framework from the Hunyuan Team at Tencent (Tencent Hy). It samples workflows from a scenario-mediated skill graph and uses a multi-agent harness to build, verify, and repair diverse executable tasks for training terminal agents.</p><p>In the skill graph, scenarios form the nodes and real terminal skills connect them as directed transitions. Sampling paths from this graph yields coherent workflows with diverse scenario–skill combinations.</p><p>A multi-agent harness turns each workflow into an executable task, then verifies and repairs it. The resulting tasks support trajectory collection for training terminal agents.</p></div></div>
       <div class="highlights"><div><span class="metric">3,560</span><h3>Usable task instances</h3><p>From one fully automated run</p></div><div><span class="metric">95.7<span>%</span></span><h3>Oracle pass rate</h3><p>Across 3,721 sampled paths</p></div><div><span class="metric">+31<span>%</span></span><h3>Scenario–skill coverage</h3><p>Over single-skill synthesis</p></div></div>
       <figure class="paper-figure"><a href="assets/figures/main_v3.png" target="_blank" rel="noopener" aria-label="Open Figure 2 at full size"><img src="assets/figures/main_v3.png" alt="SkillSynth overview: sample a compositional workflow from a skill graph, instantiate it with a multi-agent harness, and verify the resulting executable terminal task." width="2040" height="778" loading="lazy"></a><figcaption><span>Figure 2</span> From a sampled scenario–skill path to an executable task instance with dual verification.</figcaption></figure>
     </section>
@@ -231,10 +236,10 @@
     <section class="section" id="results" aria-labelledby="results-title">
       <div class="section-heading"><p class="eyebrow">03 / RESULTS</p><h2 id="results-title">Better coverage.<br>Stronger terminal performance.</h2><p class="section-intro">Supervised fine-tuning on SkillSynth trajectories improves terminal capabilities across the Qwen3 dense model family.</p></div>
       <div class="table-wrap"><table><caption>Terminal-Bench accuracy (%)</caption><thead><tr><th scope="col">Model</th><th scope="col">Terminal-Bench 1.0</th><th scope="col">Terminal-Bench 2.0</th></tr></thead><tbody><tr><th scope="row">Qwen3-8B + SkillSynth</th><td>17.1 ± 1.8</td><td>13.5 ± 2.8</td></tr><tr><th scope="row">Qwen3-14B + SkillSynth</th><td>22.9 ± 1.8</td><td>19.9 ± 1.6</td></tr><tr class="our-result"><th scope="row">Qwen3-32B + SkillSynth</th><td>33.8 ± 3.1</td><td>29.6 ± 1.6</td></tr></tbody></table></div>
-      <p class="result-note">Table 3 · Mean accuracy over three independent runs with 95% confidence intervals, using the Terminus 2 scaffold.</p>
+      <p id="evaluation-protocol" class="result-note"><a class="source-link" href="https://arxiv.org/html/2604.25727v1#S4.T3">Paper, Table 3 ↗</a> · Mean accuracy over three independent runs with 95% confidence intervals, using the Terminus 2 scaffold on Terminal-Bench 1.0 and 2.0.</p>
       <div class="method-heading"><h3>Graph-guided synthesis matters.</h3><p>Using the same multi-agent harness, SkillSynth outperforms single-skill seeds and randomly composed multi-skill seeds.</p></div>
       <div class="table-wrap ablation-table"><table><caption>Synthesis strategy ablation · Qwen3-32B</caption><thead><tr><th scope="col">Synthesis strategy</th><th scope="col">Terminal-Bench 1.0</th><th scope="col">Terminal-Bench 2.0</th></tr></thead><tbody><tr><th scope="row">Single-skill</th><td>25.4 ± 1.8</td><td>21.3 ± 2.8</td></tr><tr><th scope="row">Multi-skill</th><td>30.8 ± 1.8</td><td>25.8 ± 2.8</td></tr><tr class="our-result"><th scope="row">SkillSynth <span>Ours</span></th><td>33.8 ± 3.1</td><td>29.6 ± 1.6</td></tr></tbody></table></div>
-      <p class="result-note">Table 4 · SkillSynth improves accuracy by 8.4 and 8.3 points over single-skill synthesis, and by 3.0 and 3.8 points over multi-skill synthesis on Terminal-Bench 1.0 and 2.0.</p>
+      <p class="result-note"><a class="source-link" href="https://arxiv.org/html/2604.25727v1#S4.T4">Paper, Table 4 ↗</a> · SkillSynth improves accuracy by 8.4 and 8.3 points over single-skill synthesis, and by 3.0 and 3.8 points over multi-skill synthesis on Terminal-Bench 1.0 and 2.0.</p>
       <div class="adoption-note"><p>Task instances synthesized by SkillSynth have also been adopted to train <strong>Hy3 Preview</strong>, contributing to its terminal agent capabilities.</p></div>
     </section>
 
@@ -258,9 +263,9 @@
       </article>
     </div></section>
 
-    <section class="section abstract-section" aria-labelledby="abstract-title"><div class="section-heading"><p class="eyebrow">05 / PAPER</p><h2 id="abstract-title">Abstract</h2></div><div class="abstract-text"><p>Terminal agents have demonstrated strong potential for autonomous command-line execution, yet their training remains constrained by the scarcity of high-quality and diverse execution trajectories. Existing approaches mitigate this bottleneck by synthesizing large-scale terminal task instances for trajectory sampling. However, they primarily focus on scaling the number of tasks while providing limited control over the diversity of execution trajectories that agents actually experience during training.</p><p>In this paper, we present SkillSynth, an automated framework for terminal task synthesis built on a scenario-mediated skill graph. SkillSynth first constructs a large-scale skill graph, where scenarios serve as intermediate transition nodes that connect diverse command-line skills. It then samples paths from this graph as abstractions of real-world workflows, and uses a multi-agent harness to instantiate them into executable task instances. By grounding task synthesis in graph-sampled workflow paths, SkillSynth explicitly controls the diversity of minimal execution trajectories required to solve the synthesized tasks. Experiments on Terminal-Bench demonstrate the effectiveness of SkillSynth. Moreover, task instances synthesized by SkillSynth have been adopted to train Hy3 Preview, contributing to its enhanced agentic capabilities in terminal-based settings.</p><a class="text-link" href="https://arxiv.org/html/2604.25727v1">Read the full paper <span aria-hidden="true">↗</span></a></div></section>
+    <section id="abstract" class="section abstract-section" aria-labelledby="abstract-title"><div class="section-heading"><p class="eyebrow">05 / PAPER</p><h2 id="abstract-title">Abstract</h2></div><div class="abstract-text"><p>Terminal agents have demonstrated strong potential for autonomous command-line execution, yet their training remains constrained by the scarcity of high-quality and diverse execution trajectories. Existing approaches mitigate this bottleneck by synthesizing large-scale terminal task instances for trajectory sampling. However, they primarily focus on scaling the number of tasks while providing limited control over the diversity of execution trajectories that agents actually experience during training.</p><p>In this paper, we present SkillSynth, an automated framework for terminal task synthesis built on a scenario-mediated skill graph. SkillSynth first constructs a large-scale skill graph, where scenarios serve as intermediate transition nodes that connect diverse command-line skills. It then samples paths from this graph as abstractions of real-world workflows, and uses a multi-agent harness to instantiate them into executable task instances. By grounding task synthesis in graph-sampled workflow paths, SkillSynth explicitly controls the diversity of minimal execution trajectories required to solve the synthesized tasks. Experiments on Terminal-Bench demonstrate the effectiveness of SkillSynth. Moreover, task instances synthesized by SkillSynth have been adopted to train Hy3 Preview, contributing to its enhanced agentic capabilities in terminal-based settings.</p><a class="text-link" href="https://arxiv.org/html/2604.25727v1">Read the full paper <span aria-hidden="true">↗</span></a></div></section>
 
-    <section class="followup-band" aria-labelledby="followup-title"><div class="section"><div><p class="eyebrow">CONTINUE WITH OUR FOLLOW-UP WORK</p><h2 id="followup-title">Environment Evolution</h2><p>SkillSynth provides diverse seeds. Environment Evolution builds verified lineages of increasing difficulty to sustain agent learning.</p></div><a class="button primary" href="../">Explore Environment Evolution <span aria-hidden="true">↗</span></a></div></section>
+    <section id="related-research" class="followup-band" aria-labelledby="followup-title"><div class="section"><div><p class="eyebrow">CONTINUE WITH OUR FOLLOW-UP WORK</p><h2 id="followup-title">Environment Evolution</h2><p>Environment Evolution uses SkillSynth to supplement its diverse seed environments, then builds verified lineages of increasing difficulty to sustain reinforcement learning. <a class="source-link" href="https://arxiv.org/html/2609.04128v1#S5.SS1">Seed construction in the follow-up paper ↗</a></p></div><a class="button primary" href="../">Explore Environment Evolution <span aria-hidden="true">↗</span></a></div></section>
 
     <section class="citation-band" id="citation" aria-labelledby="citation-title"><div class="section"><div class="citation-heading"><h2 id="citation-title">BibTeX</h2><button type="button" class="button copy-button" id="copy-citation">Copy citation</button></div><pre tabindex="0" aria-label="BibTeX citation"><code id="bibtex">@misc{fan2026scalableterminaltasksynthesis,
   title         = {Toward Scalable Terminal Task Synthesis via Skill Graphs},
@@ -272,7 +277,7 @@
   archivePrefix = {arXiv},
   primaryClass  = {cs.AI},
   url           = {https://arxiv.org/abs/2604.25727}
-}</code></pre><p class="copy-status" id="copy-status" role="status" aria-live="polite"></p></div></section>
+}</code></pre><a class="text-link" href="citation.bib" download>Download BibTeX <span aria-hidden="true">↓</span></a><p class="copy-status" id="copy-status" role="status" aria-live="polite"></p></div></section>
   </main>
   <footer class="site-footer"><div><span>SkillSynth</span><p>Research from <a href="https://hy.tencent.ai/">Tencent Hunyuan (Tencent Hy) · <span lang="zh-CN">腾讯混元</span></a></p><p>Contact: <a href="mailto:zhiyuan.fan@connect.ust.hk">zhiyuan.fan@connect.ust.hk</a></p><p>Paper and figures: <a href="https://arxiv.org/abs/2604.25727">Fan et al., 2026</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p></div><a href="../">Environment Evolution ↗</a></footer>
 </body>
