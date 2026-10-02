@@ -29,7 +29,7 @@
 .image-right .story-figure { grid-column: 2; grid-row: 1; }
 .image-right .story-copy { grid-column: 1; grid-row: 1; }
 .story-figure { min-width: 0; padding: 27px; background: #fff; border: 1px solid var(--line); border-radius: 12px; }
-.story-figure > a { display: block; }
+.story-figure > .figure-preview { display: block; }
 .story-figure img { width: 100%; max-height: 345px; object-fit: contain; }
 .story-figure figcaption { margin-top: 20px; font-size: 11px; }
 .story-copy .small-label { margin-bottom: 18px; letter-spacing: .13em; }
