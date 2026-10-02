@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://environment-evolution.github.io/sitemap.xml
